@@ -1,0 +1,22 @@
+@import "../styles/vars.scss";
+
+.home {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: $main-margin;
+  border: $border;
+  border-top: 0;
+}
+
+.main {
+  border-right: $border;
+  padding: $main-padding;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
+.about {
+  grid-column-start: 4;
+  grid-column-end: 5;
+  padding: 20px;
+}

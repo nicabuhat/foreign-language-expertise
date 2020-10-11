@@ -1,42 +1,49 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
+import { Link, graphql, useStaticQuery } from "gatsby"
 import React from "react"
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
+import headerStyle from "./header.module.scss"
+
+const Header = () => {
+  const data = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          title
+        }
+      }
+    }
+  `)
+
+  return (
+    <header className={headerStyle.header}>
+      <div className={headerStyle.brand} className="grid">
+        <Link className={headerStyle.logo} to="/">
+          Logo
         </Link>
-      </h1>
-    </div>
-  </header>
-)
-
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
-
-Header.defaultProps = {
-  siteTitle: ``,
+        <h1 className={headerStyle.title}>
+          <Link to="/">{data.site.siteMetadata.title}</Link>
+        </h1>
+        <h2 className={headerStyle.author}>Arguelles</h2>
+      </div>
+      <nav>
+        <ul className={headerStyle.nav}>
+          <li>
+            <Link to="/videos/">Videos</Link>
+          </li>
+          <li>
+            <Link to="/blog/">Polyliteracy</Link>
+          </li>
+          <li>
+            <Link to="/contact">Contact</Link>
+          </li>
+          <li>
+            <Link to="/resources/">Resources</Link>
+          </li>
+        </ul>
+      </nav>
+    </header>
+  )
 }
 
 export default Header
+// {headerStyle.link}
